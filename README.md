@@ -1,25 +1,24 @@
-**Prerequisites**
+#**Prerequisites**
 Python 3.9+ Visit Python.org to download and install Python.
 Basic knowledge of Python, Flask, and HTML
 Google Cloud Project with Gemini API access
 
-Step 1: **Creating a simple program that accepts imput from microphone**
+#Step 1: **Creating a simple program that accepts imput from microphone**
 
-import speech_recognition as sr
-import base64
-import vertexai
-from vertexai.generative_models import GenerativeModel, SafetySetting, Part
+	import speech_recognition as sr
+	import base64
+	import vertexai
+	from vertexai.generative_models import GenerativeModel, SafetySetting, Part
+	# innitializing the recognition
+	r = sr.Recognizer()
 
-# innitializing the recognition
-r = sr.Recognizer()
+	# Set the microphone as the source of audio
+	mic = sr.Microphone()
 
-# Set the microphone as the source of audio
-mic = sr.Microphone()
-
-# Continuously listen for speech
-with mic as source:
-    print("Speak now.....")
-    audio = r.listen(source)
+	# Continuously listen for speech
+	with mic as source:
+   	 print("Speak now.....")
+   	 audio = r.listen(source)
 
         # Convert the audio to text
         text = r.recognize_google(audio)
@@ -29,7 +28,7 @@ with mic as source:
     except sr.RequestError as e:
         print("Could not request results from Google Speech Recognition Service; {}".format(e))
 
-		Step 2: **Extract Code from Vertex AI**
+#Step 2: **Extract Code from Vertex AI**
 	# Adding the Vertex AI code
 
 def multiturn_generate_content(user_input):
