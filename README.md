@@ -3,12 +3,13 @@ Python 3.9+ Visit Python.org to download and install Python.
 Basic knowledge of Python, Flask, and HTML
 Google Cloud Project with Gemini API access
 
-#Step 1: **Creating a simple program that accepts imput from microphone**
+	#Step 1: **Creating a simple program that accepts imput from microphone**
 
 	import speech_recognition as sr
 	import base64
 	import vertexai
 	from vertexai.generative_models import GenerativeModel, SafetySetting, Part
+
 	# innitializing the recognition
 	r = sr.Recognizer()
 
@@ -20,6 +21,7 @@ Google Cloud Project with Gemini API access
    	 print("Speak now.....")
    	 audio = r.listen(source)
 
+    try:
         # Convert the audio to text
         text = r.recognize_google(audio)
         print("User:", text)  # Print user's input clearly
