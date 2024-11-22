@@ -43,3 +43,37 @@ Google Cloud Project with Gemini API access
                                  safety_settings=safety_settings)
    	 # Extract and return ONLY the text from the response
    	 return response.text
+     		generation_config = {
+   	 "max_output_tokens": 8192,
+   	 "temperature": 1,
+   	 "top_p": 0.95,
+	}
+
+	safety_settings = [
+  	  SafetySetting(
+       	 category=SafetySetting.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold=SafetySetting.HarmBlockThreshold.OFF
+   	 ),
+   	 SafetySetting(
+        category=SafetySetting.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+        threshold=SafetySetting.HarmBlockThreshold.OFF
+    	),
+    	SafetySetting(
+        category=SafetySetting.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold=SafetySetting.HarmBlockThreshold.OFF
+   	 ),
+   	 SafetySetting(
+        category=SafetySetting.HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold=SafetySetting.HarmBlockThreshold.OFF
+   	 ),
+	]
+
+
+    	user_text = r.recognize_google(audio)
+    	bot_response = multiturn_generate_content(user_text)
+    	print("ChatBot:", bot_response) #Print the bot's response clearly
+
+	except Exception as e:
+   	 print(f"An error occurred: {e}")
+
+Step 3: 
