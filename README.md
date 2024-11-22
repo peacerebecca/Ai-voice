@@ -29,16 +29,17 @@ Google Cloud Project with Gemini API access
         print("Could not request results from Google Speech Recognition Service; {}".format(e))
 
 #Step 2: **Extract Code from Vertex AI**
-	# Adding the Vertex AI code
+	
+ 	# Adding the Vertex AI code
 
-def multiturn_generate_content(user_input):
-    vertexai.init(project="devfest-pwani-442509", location="us-central1")
-    model = GenerativeModel(
+	def multiturn_generate_content(user_input):
+    	vertexai.init(project="devfest-pwani-442509", location="us-central1")
+    	model = GenerativeModel(
         "gemini-1.5-flash-002",
-    )
-    chat = model.start_chat()
-    response = chat.send_message(user_input,
+   	 )
+    	chat = model.start_chat()
+    	response = chat.send_message(user_input,
                                  generation_config=generation_config,
                                  safety_settings=safety_settings)
-    # Extract and return ONLY the text from the response
-    return response.text
+   	 # Extract and return ONLY the text from the response
+   	 return response.text
