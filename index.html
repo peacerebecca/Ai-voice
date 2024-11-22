@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Voice Interaction</title>
+<script>
+  function recordAudio() {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        const mediaRecorder = new MediaRecorder(stream);
+        const chunks = [];
+        mediaRecorder.ondataavailable = e => chunks.push(e.data);
+        mediaRecorder.start();
+
+        setTimeout(() => {
+          mediaRecorder.stop();
+          const blob = new Blob(chunks);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64data = reader.result.split(',')[1];
+            fetch('/process_audio', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/octet-stream'
+              },
+              body: base64data
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.audio) {
+                  const audio = new Audio('data:audio/mpeg;base64,' + data.audio);
+                  audio.play();
+                  document.getElementById('botResponse').innerText = data.text;
+                } else {
+                  alert('Error: ' + data.error);
+                }
+              })
+              .catch(error => console.error('Error:', error));
+          };
+          reader.readAsDataURL(blob);
+        }, 5000); //Recording duration (adjust as needed)
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>
+</head>
+<body>
+  <h1>Voice Interaction</h1>
+  <button onclick="recordAudio()">Record Audio</button>
+  <p id="botResponse"></p>
+</body>
+</html>
