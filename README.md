@@ -3,7 +3,7 @@ Python 3.9+ Visit Python.org to download and install Python.
 Basic knowledge of Python, Flask, and HTML
 Google Cloud Project with Gemini API access
 
-Step 1**Creating a simple program that accepts imput from microphone**
+Step 1: **Creating a simple program that accepts imput from microphone**
 
 import speech_recognition as sr
 import base64
